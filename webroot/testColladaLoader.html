@@ -13,10 +13,9 @@
 <script src="js2/multiMesh.js"></script>
 <body>
 
-<body onkeydown="onKeyDown">
 
 <div id="contenido">
-    <div id="panel3d">
+    <div id="panel3d" style="height:600px;width:1000px;">
     </div>
 </div>
 
@@ -36,9 +35,9 @@ function initThreeJS()
 	escena = new THREE.Scene();
 
 	cameraManual = new THREE.PerspectiveCamera(fov = 35, cont.width()/ cont.height(), 1, 10000);
-	cameraManual.position.x = 0;
-	cameraManual.position.y = 90;
-	cameraManual.position.z = 200;
+	cameraManual.position.x = 10;
+	cameraManual.position.y = 5;
+	cameraManual.position.z = 2;
 	cameraManual.far = 10000;
 
 	camaraActual=cameraManual;
@@ -49,7 +48,7 @@ function initThreeJS()
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(cont.width(), cont.height());
-	//renderer.setClearColor(0x333333, 1);
+	renderer.setClearColor(0x333333, 1);
 
 	renderer.shadowMapEnabled = true;
 	renderer.shadowMapSoft = true;
@@ -88,44 +87,36 @@ function render()
 	frame++;
 }
 
-this.onKeyDown=function(event)
-{
-	console.log("onKeyDown");
-	if(event.keyCode == 67)
-	{
-		if (camaraActual==cam1) 
-			camaraActual = cam2;
-		else
-			camaraActual = cam1;
-	}
-}
-
-
-
+var m;
 function init()
 {
 	// ruta a los DAE, ruta a las Texturas
-	var m = new MultiMesh("models/","maps/");
+	m = new MultiMesh("models/","maps/");
 	m.addGeometry("pizarron.dae");
 	m.addTexture("pizarron.jpg");
 	m.startLoad();
 
-	var material={
-		"pizarron":new THREE.MeshPhongMaterial({
+	m.onAssetsLoaded=function()
+	{
+	var material=new THREE.MeshPhongMaterial({
 		color: 0x888888,
 		specular: 0xFFFFFF,
 		shininess: 1,
 		shading: THREE.SmoothShading,
 		map: m.getTexture("pizarron.jpg")
-		//side:THREE.DoubleSide
-	})};
+	});
 
+	var pizarronMesh = new THREE.Mesh(m.getGeometry("pizarron.dae"),material);
+	pizarronMesh.scale.x = 0.05;
+	pizarronMesh.scale.y = 2;
+	pizarronMesh.rotation.x = -Math.PI/2;
+	pizarronMesh.updateMatrix();
+	pizarronMesh.matrixAutoUpdate = false;
+	var pizarron = new THREE.Object3D();
+	pizarron.add(pizarronMesh);
+	escena.add(pizarron);
+	}
 
-//TODO esto no anda, m.getGeometry("pizarron.dae") devuelve null
-//	var pizarronMesh = new THREE.Mesh(m.getGeometry("pizarron.dae"),m.getTexture("pizarron.jpg"));
-//	var pizarron = new THREE.Object3D();
-//	pizarron.add(pizarronMesh);
-//	escena.add(pizarron);
 }
 
 
