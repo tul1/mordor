@@ -13,7 +13,6 @@
 <script src="js2/multiMesh.js"></script>
 <body>
 
-
 <div id="contenido">
     <div id="panel3d" style="height:600px;width:1000px;">
     </div>
@@ -106,12 +105,10 @@ function init()
 		map: m.getTexture("pizarron.jpg")
 	});
 
-	var pizarronMesh = new THREE.Mesh(m.getGeometry("pizarron.dae"),material);
-	pizarronMesh.scale.x = 0.05;
-	pizarronMesh.scale.y = 2;
+	var pizarronMesh = new THREE.Mesh(m.getGeometry("pizarron.dae"),material);	
 	pizarronMesh.rotation.x = -Math.PI/2;
 	pizarronMesh.updateMatrix();
-	pizarronMesh.matrixAutoUpdate = false;
+	pizarronMesh.matrixAutoUpdate = false;	
 	var pizarron = new THREE.Object3D();
 	pizarron.add(pizarronMesh);
 	escena.add(pizarron);

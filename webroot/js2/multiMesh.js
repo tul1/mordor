@@ -96,10 +96,10 @@ MultiMesh.prototype.loadGeometries=function()
 			var loader = new THREE.ColladaLoader();
 			var url=this._colladaPath+files[i];
 			this.log("loadGeometries() load:"+url);
+	
 
 			loader.load(url,(function (context,filename){
 				var f = function (colladaFile){
-
 					var node = colladaFile.scene.children[2];//el 2 puede cambiar depende del dea, para blender es 2, para 3dms es 0.
 					var depth=0;
 
