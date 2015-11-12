@@ -100,7 +100,7 @@ MultiMesh.prototype.loadGeometries=function()
 
 			loader.load(url,(function (context,filename){
 				var f = function (colladaFile){
-					var node = colladaFile.scene.children[2];//el 2 puede cambiar depende del dea, para blender es 2, para 3dms es 0.
+					var node = colladaFile.scene.children[0];
 					var depth=0;
 
 					while ((!node.hasOwnProperty("geometry")) && (depth<4) && (node.children[0]))

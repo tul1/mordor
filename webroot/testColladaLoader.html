@@ -104,9 +104,10 @@ function init()
 		shading: THREE.SmoothShading,
 		map: m.getTexture("pizarron.jpg")
 	});
-
+	
 	var pizarronMesh = new THREE.Mesh(m.getGeometry("pizarron.dae"),material);	
-	pizarronMesh.rotation.x = -Math.PI/2;
+	pizarronMesh.rotation.x = Math.PI/2;
+	pizarronMesh.rotation.z = Math.PI;
 	pizarronMesh.updateMatrix();
 	pizarronMesh.matrixAutoUpdate = false;	
 	var pizarron = new THREE.Object3D();
