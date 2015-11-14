@@ -85,7 +85,7 @@ function init()
 {
 	// ruta a los DAE, ruta a las Texturas
 	m = new MultiMesh("models/","maps/");
-	m.addGeometry("labi1.dae");
+	m.addGeometry("labi.dae");
 	m.addGeometry("pizarron.dae");
 	m.addTexture("pizarron.jpg");
 	m.startLoad();
@@ -122,7 +122,7 @@ function init()
 //TODO hay un tema con el dae, no se estan importanto bien las dimensiones.
 //TODO small loops
 
-		var labiMesh = new THREE.Mesh(m.getGeometry("labi1.dae"), materiales["labi"]);	
+		var labiMesh = new THREE.Mesh(m.getGeometry("labi.dae"), materiales["labi"]);	
 		labiMesh.rotation.x = -Math.PI/2;
 		labiMesh.rotation.z = Math.PI;
 
